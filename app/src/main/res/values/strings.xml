@@ -4,4 +4,5 @@
     <string name="home">Home</string>
     <string name="watchlist">Watchlist</string>
     <string name="trade_brains">Trade Brains</string>
+    <string name="search_result">%s ($%s)</string>
 </resources>

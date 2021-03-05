@@ -30,7 +30,7 @@ class MainActivity : BaseActivity() {
             }
         }
     }
-    fun loadFragment(fragment: Fragment):Boolean{
+    private fun loadFragment(fragment: Fragment):Boolean{
         return run {
             supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
             true
