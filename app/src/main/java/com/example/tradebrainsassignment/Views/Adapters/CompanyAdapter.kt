@@ -31,7 +31,9 @@ class CompanyAdapter(
     override fun onBindViewHolder(holder: CompanyVH, position: Int) {
         companies[position].let {
             holder.onBind(
-                it)
+                it,
+                addItem
+            )
         }
     }
 
@@ -42,7 +44,7 @@ class CompanyAdapter(
     class CompanyVH(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val item: ImageButton = itemView.item
         private val name: TextView = itemView.tv_name
-        fun onBind(company: Company){
+        fun onBind(company: Company,addItem: (company: Company) -> Unit){
             val sharePrice =String.format("%2f",company.sharePrice.toDouble())
             name.text=itemView.context.getString(
                 R.string.search_result,
@@ -50,7 +52,7 @@ class CompanyAdapter(
                 sharePrice
             )
             item.setOnClickListener {
-                it.isSelected=!it.isSelected
+                addItem(company)
             }
         }
     }

@@ -7,7 +7,9 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tradebrainsassignment.Database.AppDatabase
 import com.example.tradebrainsassignment.Models.Company
 import com.example.tradebrainsassignment.Models.SearchResponse
 import com.example.tradebrainsassignment.R
@@ -31,11 +33,10 @@ class TradebrainsFragment : Fragment(R.layout.fragment_tradebrains) {
         val searchResults =mutableListOf<Company>()
         val adapter= CompanyAdapter(searchResults,
             {
-                Log.e(TAG, "initViews: Add item $it" )
-
+                insertToDB(it)
             },
             {
-                Log.e(TAG, "initViews: Remove item $it" )
+                Log.e(TAG, "initViews: Remove item $it")
             })
         rv_searchResults.layoutManager=LinearLayoutManager(context)
         rv_searchResults.adapter=adapter
@@ -46,14 +47,16 @@ class TradebrainsFragment : Fragment(R.layout.fragment_tradebrains) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                SearchRepository.getInstance().search(s.toString())
+                SearchRepository.getInstance(context!!).search(s.toString())
                     .subscribe(
                         {
-                            Log.e(TAG, "onTextChanged: $it")
+                            searchResults.clear()
                             if (!it.companies.isNullOrEmpty()) {
                                 searchResults.addAll(it.companies)
                                 adapter.setData(searchResults)
                             }
+                            else
+                                Toast.makeText(context,getString(R.string.no_data),Toast.LENGTH_LONG).show()
                         },
                         {
                             Log.e(TAG, "onTextChanged: Errpr $it",)
@@ -69,5 +72,18 @@ class TradebrainsFragment : Fragment(R.layout.fragment_tradebrains) {
             }
 
         })
+    }
+    private fun insertToDB(company:Company){
+        SearchRepository.getInstance(context!!).insertCompany(company)
+            .subscribe (
+                {
+                    Toast.makeText(context!!,getString(R.string.added_to_watchlist),Toast.LENGTH_LONG).show()
+                },
+                {
+                    Log.e(TAG, "initViews: ERROR $it")
+                })
+            .also {
+                CompositeDisposable().add(it)
+            }
     }
 }
