@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-    <EditText
+    tools:context=".Views.MainActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentContainer"
+        />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/fragmentTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="sample"
-        android:textColor="@color/black"
-        android:id="@+id/et_searchBar"
-        />
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_searchResults"
-        />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/colorText"
+        app:menu="@menu/fragment_menu" />
+</RelativeLayout>

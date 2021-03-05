@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TradeBrainsAssignment</string>
+    <string name="enter_name_here">Enter Name here</string>
+    <string name="home">Home</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="trade_brains">Trade Brains</string>
 </resources>
