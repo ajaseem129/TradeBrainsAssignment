@@ -3,12 +3,10 @@ package com.example.tradebrainsassignment.Repository
 import android.content.Context
 import com.example.tradebrainsassignment.Database.AppDatabase
 import com.example.tradebrainsassignment.Models.Company
-import com.example.tradebrainsassignment.Models.SearchResponse
 import com.example.tradebrainsassignment.Retrofit.ApiClient
 import com.example.tradebrainsassignment.Retrofit.ApiInterface
 import com.example.tradebrainsassignment.Utils.Const
 import io.reactivex.Completable
-import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -35,10 +33,11 @@ class SearchRepository private constructor(
         }
     }
     private val apiKey= Const.API_KEY
-    private val function= "SYMBOL_SEARCH"
+    private val functionSearch= "SYMBOL_SEARCH"
+    private val functionDaily= "TIME_SERIES_DAILY"
     fun search(keyword:String)=
         apiInterface.search(
-            function,
+            functionSearch,
             keyword,
             apiKey
         )
@@ -55,9 +54,18 @@ class SearchRepository private constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
     }
-    fun getCompanies(): Single<List<com.example.tradebrainsassignment.Database.Entity.Company>> {
-        return appDatabase.companyDao().getCompanies()
+    fun getCompanies(): Single<List<Company>> {
+        return appDatabase.companyDao().getCompanies().map {
+            it.map {
+                Company(it.symbol,it.name,it.sharePrice)
+            }
+        }
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+
+    }
+    fun getCompany(symbol:String)=
+        apiInterface.getLatestInfo(functionDaily,symbol,apiKey)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-    }
 }

@@ -31,13 +31,10 @@ class TradebrainsFragment : Fragment(R.layout.fragment_tradebrains) {
     private fun initViews(){
         pageName.text=getString(R.string.trade_brains)
         val searchResults =mutableListOf<Company>()
-        val adapter= CompanyAdapter(searchResults,
-            {
-                insertToDB(it)
-            },
-            {
-                Log.e(TAG, "initViews: Remove item $it")
-            })
+        val adapter= CompanyAdapter(searchResults
+        ) {
+            insertToDB(it)
+        }
         rv_searchResults.layoutManager=LinearLayoutManager(context)
         rv_searchResults.adapter=adapter
         et_searchBar.addTextChangedListener(object : TextWatcher {
