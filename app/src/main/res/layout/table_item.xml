@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="10dp"
-    android:orientation="horizontal">
+    android:background="@drawable/background"
+    >
 
     <TextView
         android:id="@+id/tv_Cname"
@@ -11,13 +13,13 @@
         android:layout_height="match_parent"
         android:layout_weight=".75"
         android:text="TextView" />
-
     <TextView
         android:id="@+id/tv_Cprice"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight=".25"
-        android:text="TextView" />
+        android:text="TextView"
+        />
 
     <ImageView
         android:id="@+id/iv_remove"

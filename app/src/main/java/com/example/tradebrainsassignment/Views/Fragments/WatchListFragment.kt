@@ -46,21 +46,22 @@ class WatchListFragment:Fragment(R.layout.fragment_watchlist) {
                 it.map {company->
                     SearchRepository.getInstance(context!!).getCompany(company.symbol)
                             .subscribe(
-                                {
-                                    val string = it?.listOfPrices
-                                    val date = it?.metaData
+                                    {
+                                        val string = it?.listOfPrices
+                                        val date = it?.metaData
 
-                                    val company = Company(
-                                        company.symbol,
-                                        company.name,
-                                        string?.getOrDefault(date?.latestDate, string.values.first())?.sharePrice ?:"Unavailable"
-                                    )
-                                    adapter.addData(company)
-                                    list.add(company)
-                                },
-                                {
-                                    Log.e("TAG", "Error getCompanies: $it",)
-                                })
+                                        val company = Company(
+                                                company.symbol,
+                                                company.name,
+                                                string?.getOrDefault(date?.latestDate, string.values.first())?.sharePrice
+                                                        ?: "Unavailable"
+                                        )
+                                        adapter.addData(company)
+                                        Log.e("TAG", "getCompanies: $it", )
+                                    },
+                                    {
+                                        Log.e("TAG", "Error getCompanies: $it", )
+                                    })
                 }
             }
             .subscribe(

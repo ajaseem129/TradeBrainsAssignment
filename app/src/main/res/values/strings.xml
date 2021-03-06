@@ -7,4 +7,6 @@
     <string name="search_result">%s ($%s)</string>
     <string name="no_data">No data available</string>
     <string name="added_to_watchlist">Added to watchlist</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
 </resources>

@@ -4,6 +4,30 @@
     android:layout_height="match_parent">
     <include
         layout="@layout/header_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="10dp"
+        android:background="@drawable/background"
+        >
+
+        <TextView
+            android:id="@+id/tv_Cname"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".75"
+            android:text="@string/name" />
+        <TextView
+            android:id="@+id/tv_Cprice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:text="@string/price"
+            />
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
