@@ -1,7 +1,7 @@
 package com.example.tradebrainsassignment.Repository
 
 import android.content.Context
-import com.example.tradebrainsassignment.Database.AppDatabase
+import com.example.tradebrainsassignment.Database.Db.AppDatabase
 import com.example.tradebrainsassignment.Models.Company
 import com.example.tradebrainsassignment.Retrofit.ApiClient
 import com.example.tradebrainsassignment.Retrofit.ApiInterface

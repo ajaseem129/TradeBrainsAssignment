@@ -1,4 +1,4 @@
-package com.example.tradebrainsassignment.Database
+package com.example.tradebrainsassignment.Database.Db
 
 import android.content.Context
 import androidx.room.Database

@@ -6,12 +6,9 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tradebrainsassignment.Database.AppDatabase
 import com.example.tradebrainsassignment.Models.Company
-import com.example.tradebrainsassignment.Models.SearchResponse
 import com.example.tradebrainsassignment.R
 import com.example.tradebrainsassignment.Repository.SearchRepository
 import com.example.tradebrainsassignment.Views.Adapters.CompanyAdapter
