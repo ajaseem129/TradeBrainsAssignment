@@ -31,17 +31,18 @@ class WatchListFragment:Fragment(R.layout.fragment_watchlist) {
         getCompanies()
     }
     private fun getCompanies(){
+        var localList= emptyList<Company>()
         val list:MutableList<Company> = mutableListOf()
-        val adapter = WatchListAdapter(list) {
-            list.remove(it)
-            removeFromDb(it)
+        val adapter = WatchListAdapter(list) {company->
+            list.remove(company)
+            removeFromDb(localList.first{ it.symbol==company.symbol })
             rv_table.adapter?.notifyDataSetChanged()
         }
         rv_table.layoutManager=LinearLayoutManager(context)
         rv_table.adapter=adapter
         SearchRepository.getInstance(context!!).getCompanies()
             .map {
-                val feeds = it
+                localList= it
                 it.map {company->
                     SearchRepository.getInstance(context!!).getCompany(company.symbol)
                             .subscribe(
@@ -74,6 +75,13 @@ class WatchListFragment:Fragment(R.layout.fragment_watchlist) {
             }
     }
     fun removeFromDb(company: Company){
-
+        SearchRepository.getInstance(context!!).delete(company).subscribe({
+            Log.e("TAG", "removeFromDb: SUCCESS", )
+        },{
+            Log.e("TAG", "removeFromDb: Failure $it", )
+        })
+            .also {
+                CompositeDisposable().add(it)
+            }
     }
 }

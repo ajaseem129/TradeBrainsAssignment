@@ -68,4 +68,11 @@ class SearchRepository private constructor(
         apiInterface.getLatestInfo(functionDaily,symbol,apiKey)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
+    fun delete(company: Company)=appDatabase.companyDao()
+        .deleteFromDb(com.example.tradebrainsassignment.Database.Entity.Company(
+            symbol = company.symbol,
+            name = company.name,
+            sharePrice = company.sharePrice
+    )).observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
 }
