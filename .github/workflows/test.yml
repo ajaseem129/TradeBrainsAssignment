@@ -22,6 +22,9 @@ jobs:
          console.log(title);
          console.log( title.replace(/\s+/g, '-').toLowerCase());
          return title = title.replace(/\s+/g, '-').toLowerCase();
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{steps.set-name.outputs.result}}
     - name: create init file
       run: echo ${{ github.event.issue.title }} > .issue
     - name: Commit changes
