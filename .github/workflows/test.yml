@@ -41,10 +41,12 @@ jobs:
         author_name: default_author
         message: 'init'
         add: '.issue'
-    - uses: peter-evans/create-pull-request@v3
+    - uses: repo-sync/pull-request@v2
       name: pull-request
       with:
-        commit-message: ${{ github.event.issue.title }}
-        title: Pulling Issue \#${{ github.event.issue.number }} into development
-        branch: ${{steps.set-name.outputs.result}}
+        destination_branch: "master"
+        pr_title: "Pulling ${{steps.set-name.outputs.result}} into main"
+        pr_body: "👑 *An automated PR*"
+        pr_draft: false
+        github_token: ${{ secrets.GITHUB_TOKEN }}
  
