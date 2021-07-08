@@ -18,7 +18,7 @@ jobs:
         result-encoding: string
         script: |
          // Get the isue name
-         const {title} = process.env;
+         var {title} = process.env;
          console.log(title);
          console.log( title.replace(/\s+/g, '-').toLowerCase());
          return title = title.replace(/\s+/g, '-').toLowerCase();
