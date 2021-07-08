@@ -36,5 +36,5 @@ jobs:
           [create-pull-request](https://github.com/peter-evans/create-pull-request).
         labels: issue, automated pr
         branch: ${{steps.set-name.outputs.result}}
-        delete-branch: true
+        delete-branch: false
 
