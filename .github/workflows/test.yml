@@ -21,6 +21,6 @@ jobs:
         commit-message: ${{ github.event.issue.title }}
         title: Pulling Issue \#${{ github.event.issue.number }} into development
         body: Fix issue
-        branch: update-changelog
+        branch: ${{ github.event.issue.title }}
         base: master
   
