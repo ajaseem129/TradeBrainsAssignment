@@ -22,6 +22,14 @@ jobs:
          console.log(title);
          console.log( title.replace(/\s+/g, '-').toLowerCase());
          return title = title.replace(/\s+/g, '-').toLowerCase();
+    - name: create init file
+      run: echo ${{ github.event.issue.title }} > .issue
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v7
+      with:
+        author_name: default_author
+        message: 'init'
+        add: '.issue'
     - uses: peterjgrainger/action-create-branch@v2.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
