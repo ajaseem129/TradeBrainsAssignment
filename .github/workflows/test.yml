@@ -46,7 +46,5 @@ jobs:
       with:
         commit-message: ${{ github.event.issue.title }}
         title: Pulling Issue \#${{ github.event.issue.number }} into development
-        body: Fix issue
         branch: ${{steps.set-name.outputs.result}}
-        base: master
  
